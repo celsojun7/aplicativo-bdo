@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDO 2</title>
+    <style>
+        body{
+            background-color: #f2f2f2;
+            font-family: Arial;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        .container{
+            max-width: 800px;
+            margin: 10px auto;
+            padding: 9px;
+            border: 10px;
+            background-color: #ffffff;
+            box-shadow: 0 0 2px #838383;
+            border-radius: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column; 
+        }
+        .title-bar {
+            background-color: #2980ba;
+            padding: 20px;
+            margin-left: 0;
+            margin-right: 0;
+            margin-top: 10px;
+            margin-bottom: 1px;
+            box-shadow: 0 0 3px #838383;
+            border-radius: 20px;
+        }
+        .title-bar h4 {
+            font-weight: normal;
+            margin: 0;
+            color: #ffffff;
+            text-align: center;
+            font-size: large;            
+        }
+        label {
+            display: block;
+            margin-bottom: 4px;
+            margin-top: 10px;
+            color: #2980ba; 
+            font-weight: bold;
+            font-size: 14px;
+            margin-left: 12px;
+        }
+        button.generate-btn{
+            width: 70%;
+            padding: 15px;
+            border: 2px;
+            border-radius: 20px;
+            background-color: #2980ba;
+            font-weight: bold;
+            text-align: center;
+            color: rgb(255, 255, 255);
+            cursor: pointer;
+            transition: background-color 0.3s ease-in-out;
+            margin-left: 15%;
+            margin-right: 15%;
+            margin-top: 20px;
+            margin-bottom: 40px;
+            box-shadow: 0 0 3px #838383;
+            font-size: 13px;
+        }
+        button.generate-btn:hover {
+            background-color: #2991d6;
+        }
+        input[type="text"], input[type="number"], input[type="date"], input[type="time"], textarea, select{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #f2f2f2;
+            border-radius: 20px;
+            box-sizing: border-box;
+            background-color: #f2f2f2;
+            margin-bottom: 5px;
+            margin-top: 10px;
+            color: rgb(72, 72, 72);
+            font-size: 13px;
+        }
+        textarea{
+            resize: vertical;
+            height: 100%;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            background-color: transparent;
+            color: #2980ba; 
+            font-size: 9px;
+        }
+        .hidden {
+            display: none;
+        }
+        .talhao-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 8px;
+            margin-bottom: 10px;
+            align-items: center; /* Alinha os elementos verticalmente */
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        .talhao-group label {
+            margin-right: 10px; /* Espaço entre o label e os radios */
+            font-size: 12px;
+            margin-top: 8px;
+            margin-bottom: 10px;
+        }
+        .talhao-group input[type="radio"] {
+            margin-right: 5px; /* Espaço entre os radios */
+            
+        }
+        .implemento-group {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 8px;
+            margin-bottom: 10px;
+            margin-right: 20px;
+            margin-left: 20px;
+        }
+        .implemento-group label {
+            margin-right: 10px; /* Espaço entre o label e os radios */
+            font-size: 12px;
+            margin-top: 8px;
+            margin-bottom: 10px; 
+        }
+        .implemento-group input[type="radio"] {
+            margin-right: 5px; /* Espaço entre os radios */
+       }
+       .informe {
+            display: block;
+            margin-top: 10px;
+            color: #2980ba;
+            font-weight: normal;
+            font-size: 12px;
+            margin-left: 10px;
+            margin-bottom: 10px;
+            margin-right: 10px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-bar">
+            <h4>BDO - BOLETIM DE OPERAÇÕES AGRICOLAS</h4>
+        </div>
+        <div class="informe">
+        <h4>Informe todos os dados corretamente para um bom aproveitamento das informações.</h4>
+        </div>
+        <form id="boletim-form">
+            <div>
+                <label for="propriedade">1. PROPRIEDADE</label>
+                <select id="propriedade" name="PROPRIEDADE:" required>
+                    <option value="" disabled selected>Escolha a propriedade ...</option>          
+                    <option value="FAZENDA RAÍZES">FAZENDA RAÍZES</option>
+                    <option value="FAZENDA PLANALTINA">FAZENDA PLANALTINA</option>
+                    <option value="OUTRA FAZENDA">OUTRA FAZENDA</option>
+                </select>
+            </div>
+            <div>
+                <label for="operationDate">2. DATA DA OPERAÇÃO</label>
+                <input type="date" id="operationDate" name="DATA DA OPERAÇÃO:" required>
+            </div>
+            <div>
+                <label for="responsavel">3. RESPONSÁVEL PELO BDO (OPERADOR)</label>
+                <input type="text" id="responsavel" name="RESPONSÁVEL PELO BDO (OPERADOR):" placeholder="Digite o nome do operador ..." required>
+            </div>
+            <div>
+                <label for="lider">4. RESPONSÁVEL PELA OPERAÇÃO (LÍDER)</label>
+                <input type="text" id="lider" name="RESPONSÁVEL PELA OPERAÇÃO (LÍDER):" placeholder="Digite o nome do líder ..." required>
+            </div>
+            <div>
+                <label for="startTime">5. HORA DE INÍCIO DA OPERAÇÃO</label>
+                <input type="time" id="startTime" name="HORA DE INÍCIO DA OPERAÇÃO:" required>
+            </div>
+            <div>
+                <label for="endTime">6. HORA DE TÉRMINO DA OPERAÇÃO</label>
+                <input type="time" id="endTime" name="HORA DE TÉRMINO DA OPERAÇÃO:" required>
+            </div>
+            <div>
+                <label for="initialHorimeter">7. HORÍMETRO INICIAL</label>
+                <input type="number" id="initialHorimeter" name="HORÍMETRO INICIAL:" placeholder="Digite o horímetro inicial da máquina ..." required>
+            </div>
+            <div>
+                <label for="finalHorimeter">8. HORÍMETRO FINAL</label>
+                <input type="number" id="finalHorimeter" name="HORÍMETRO FINAL:" placeholder="Digite o horímetro final da máquina ..." required>
+            </div>
+            <div>
+                <label for="deslocamento">9. TEMPO EM DESLOCAMENTO (MINUTOS/HORAS)</label>
+                <input type="text" id="deslocamentohoras" name="TEMPO GASTO EM DESLOCAMENTO (MINUTOS/HORAS):" placeholder="Digite a quantidade total de min/hrs em deslocamento ..." required>
+            </div>
+            <div>
+                <label for="frota">10. MÁQUINA E FROTA</label>
+                <select id="frota" name="MÁQUINA E FROTA:" required>
+                    <option value="" disabled selected>Escolha a máquina e frota ...</option>
+                    <optgroup label="-TRATORES-">
+                        <option value="PUMA 230/ FROTA 4021">PUMA 230/ FROTA 4021</option>
+                        <option value="FARMALL 110/ FROTA 4022">FARMALL 110/ FROTA 4022</option>
+                        <option value="FARMALL 110/ FROTA 4023">FARMALL 110/ FROTA 4023</option>
+                        <option value="STEIGER 420/ FROTA 4024">STEIGER 420/ FROTA 4024</option>
+                        <option value="FARMALL 95/ FROTA 4015">FARMALL 95/ FROTA 4015</option>
+                        <option value="STEIGER AFS/ FROTA 4016">STEIGER AFS/ FROTA 4016</option>
+                        <option value="FARMALL 110/ FROTA 4017">FARMALL 110/ FROTA 4017</option>
+                        <option value="BM 85/ FROTA 4002">BM 85/ FROTA 4002</option>
+                        <option value="TL 65/ FROTA 4003">TL 65/ FROTA 4003</option>
+                        <option value="TL 75/ FROTA 4006">TL 75/ FROTA 4006</option>
+                        <option value="TL 95/ FROTA 4007">TL 95/ FROTA 4007</option>
+                        <option value="TM 7040/ FROTA 4008">TM 7040/ FROTA 4008</option>
+                        <option value="6110D/ FROTA 4009">6110D/ FROTA 4009</option>
+                        <option value="MAGNUM 340/ FROTA 4010">MAGNUM 340/ FROTA 4010</option>
+                        <option value="MAGNUM 235/ FROTA 4012">MAGNUM 235/ FROTA 4012</option>
+                        <option value="PUMA 170/ FROTA 4013">PUMA 170/ FROTA 4013</option>
+                    <optgroup label="-PULVERIZADORES-">
+                        <option value="PATRIOT 350/ FROTA 4011">PATRIOT 350/ FROTA 4011</option>
+                        <option value="PATRIOT 350/ FROTA 4020">PATRIOT 350/ FROTA 4020</option>
+                    <optgroup label="CARREGADEIRAS:">
+                        <option value="WF20F/ FROTA 4014">WF20F/ FROTA 4014</option>
+                        <option value="W20F/ FROTA 4018">W20F/ FROTA 4018</option>
+                        <option value="W20F/ FROTA 4019">W20F/ FROTA 4019</option>
+                    <optgroup label="-CAMINHÕES-">
+                        <option value="G420 6X4/ FROTA 3009">G420 6X4/ FROTA 3009</option>
+                        <option value="1313 (MELOSA)/ FROTA 3005">1313 (MELOSA)/ FROTA 3005</option>
+                        <option value="1313 (PIPA)/ FROTA 3006">1313 (PIPA)/ FROTA 3006</option>
+                        <option value="D14000 (MUNCK)/ FROTA 3007">D14000 (MUNCK)/ FROTA 3007</option>
+                        <option value="G420 6X4/ FROTA 3009">G420 6X4/ FROTA 3009</option>
+                        <option value="31.280 (THOR)/ FROTA 3008">31.280 (THOR)/ FROTA 3008</option>
+                    <optgroup label="-COLHEITADEIRAS-">
+                        <option value="STS 9670/ FROTA 5001">STS 9670/ FROTA 5001</option>
+                        <option value="7230/ FROTA 5002">7230/ FROTA 5002</option>
+                        <option value="7230/ FROTA 5003">7230/ FROTA 5003</option>
+                        <option value="9250 AFS/ FROTA 5004">9250 AFS/ FROTA 5004</option>
+                    <optgroup label="-ESCAVADEIRAS-">
+                        <option value="CX220C/ FROTA 4019">CX220C/ FROTA 4019</option>
+                </select>
+            </div>
+            <div class="implemento-group">
+                <label for="implemento">FOI UTILIZADO IMPLEMENTO NA OPERAÇÃO?</label>
+                <input type="radio" id="simImp" name="FOI UTILIZADO IMPLEMENTO NA OPERAÇÃO?" value="SIM" onclick="showImplemento()">
+                <label for="simImp">SIM</label>
+                <input type="radio" id="naoImp" name="FOI UTILIZADO IMPLEMENTO NA OPERAÇÃO?" value="NÃO" onclick="hideImplemento()">
+                <label for="naoImp">NÃO</label>
+            </div>
+            <div id="implemento-group" class="hidden">
+                <label for="implemento">QUAL FOI O IMPLEMENTO UTILIZADO?</label>
+                <select id="implemento" name="IMPLEMENTO UTILIZADO:">
+                <option value="" disabled selected>Escolha o implemento utilizado ...</option>
+
+                <optgroup label="PLATAFORMAS">
+                <option value="PLATAFORMA BRAVA 5880/ FROTA 7030">PLATAFORMA BRAVA 5880/ FROTA 7030</option>
+                <option value="PLATAFORMA JOHN DEERE 30 PÉS/ FROTA 7038">PLATAFORMA JOHN DEERE 30 PÉS/ FROTA 7038</option>
+                <option value="PLATAFORMA CASE 35 PÉS/ FROTA 7039">PLATAFORMA CASE 35 PÉS/ FROTA 7039</option>
+                <option value="PLATAFORMA CASE 35 PÉS/ FROTA 7047">PLATAFORMA CASE 35 PÉS/ FROTA 7047</option>
+                <option value="PLATAFORMA BRAVA 9980/ FROTA 7048">PLATAFORMA BRAVA 9980/ FROTA 7048</option>
+                <option value="PLATAFORMA GTS 2450/ FROTA 7059">PLATAFORMA GTS 2450/ FROTA 7059</option>
+                <optgroup label="GRADES">
+                <option value="GRADE PESADA CIVEMASA 16x32/ FROTA 7015">GRADE PESADA CIVEMASA 16x32/ FROTA 7015</option>
+                <option value="GRADE PESADA CIVEMASA 22x38/ FROTA 7046">  GRADE PESADA CIVEMASA 22x38/ FROTA 7046</option>
+                <option value="GRADE PESADA TATU 14x28/ FROTA 7009">GRADE PESADA TATU 14x28/ FROTA 7009</option>
+                <option value="GRADE NIVELADORA CIVEMASA/ FROTA 7002">GRADE NIVELADORA CIVEMASA/ FROTA 7002</option>
+                <optgroup label="BAZUCAS">
+                <option value="BAZUCA GRAND SPEED 27000/ FROTA 7053">BAZUCA GRAND SPEED 27000/ FROTA 7053</option>
+                <option value="BAZUCA SOLUS 20000 TN/ FROTA 7021">BAZUCA SOLUS 20000 TN/ FROTA 7021</option>
+                <optgroup label="ADUBADORES">
+                <option value="ADUBADOR HERCULES 10000 INOX/ FROTA 7045"> ADUBADOR HERCULES 10000 INOX/ FROTA 7045</option>
+                <optgroup label="VAGÕES/CAÇAMBAS/CARRETAS">
+                <option value="VAGÃO REALMIX 12000/ FROTA 7049">VAGÃO REALMIX 12000/ FROTA 7049</option>
+                <option value="VAGÃO SILTOMAC 4 TON/ FROTA 7029">VAGÃO SILTOMAC 4 TON/ FROTA 7029</option>
+                <option value="CAÇAMBA CEMAG 13M³/ FROTA 7022">CAÇAMBA CEMAG 13M³/ FROTA 7022</option>
+                <optgroup label= "ENSILADEIRAS">
+                <option value="ENSILADEIRA NOGUEIRA/ FROTA 7027">ENSILADEIRA NOGUEIRA/ FROTA 7027</option>
+                <option value="ENSILADEIRA P/ SILO BOLSA/ FROTA 7028">ENSILADEIRA P/ SILO BOLSA/ FROTA 7028</option>
+                <optgroup label="PLANTADEIRAS">               
+                <option value="PLANTADEIRA GTS EXATUS/ FROTA 7051">PLANTADEIRA GTS EXATUS/ FROTA 7051</option>
+                <option value="PLANTADEIRA CASE 17 LINHAS/ FROTA 7052">PLANTADEIRA CASE 17 LINHAS/ FROTA 7052</option>
+                <option value="PLANTADEIRA CASE EASY RISER 3232 (32 LINHAS)/ FROTA 7043">PLANTADEIRA CASE EASY RISER 3232 (32 LINHAS)/ FROTA 7043</option>
+                <option value="PLANTADEIRA CASE EASY RISER 3215 (14LINHAS)/ FROTA 7044">PLANTADEIRA CASE EASY RISER 3215 (14LINHAS)/ FROTA 7044</option>
+                <optgroup label="PLAINAS">
+                <option value="PLAINA STARPLAN 5.000 MAC.STARA/ FROTA 7034">PLAINA STARPLAN 5.000 MAC.STARA/ FROTA 7034</option>
+                <option value="PLAINA AGRICOLA ROBUST 480/ FROTA 7041">PLAINA AGRICOLA ROBUST 480/ FROTA 7041</option>
+                <optgroup label=" OUTROS IMPLEMENTOS">
+                <option value="EMBUITIDORA DE GRAOS UMIDO MULTIAGRO/ FROTA 7054">EMBUITIDORA DE GRAOS UMIDO MULTIAGRO/ FROTA 7054</option>
+                <option value="ENLEIDADOR ROTATIVO DE DE PEDRA NIPAL/ DDAEI 7057">ENLEIDADOR ROTATIVO DE DE PEDRA NIPAL/ DDAEI 7057</option>
+                <option value="TERRACEADOR TATU TSTA/FROTA 7007">TERRACEADOR TATU TSTA/FROTA 7007</option>
+                <option value="DISTRIBUIDOR DE CALCARIO TATU 10,5 TN/FROTA 7010">DISTRIBUIDOR DE CALCARIO TATU 10,5 TN/FROTA 7010</option>
+                <option value="DESCOMPACTADOR VOLVERINI/ FROTA 7078">DESCOMPACTADOR VOLVERINI/ FROTA 7078</option>
+                </select>
+            </div>
+            <div>
+                <label for="atividade">11. ATIVIDADE REALIZADA</label>
+                <select id="atividade" name="ATIVIDADE REALIZADA:" required>
+                    <option value="" disabled selected>Escolha a atividade realizada ...</option>
+                    <option value="PLANTIO">PLANTIO</option>
+                    <option value="COLHEITA">COLHEITA</option>
+                    <option value="GRADAGEM">GRADAGEM</option>
+                    <option value="CALAGEM/ADUBAÇÃO">CALAGEM/ADUBAÇÃO</option>
+                    <option value="PLAINAGEM">PLAINAGEM</option>
+                    <option value="ENLEIRAMENTO">ENLEIRAMENTO</option>
+                    <option value="MOEÇÃO DE PEDRAS">MOEÇÃO DE PEDRAS</option>
+                    <option value="PULVERIZAÇÃO">PULVERIZAÇÃO</option>
+                    <option value="SILAGEM">SILAGEM</option>   
+                    <option value= "MANUTENÇÃO DE ESTRADAS">MANUTENÇÃO DE ESTRADAS</option>              
+                    <option value="OUTRAS ATIVIDADES">OUTRAS ATIVIDADES </option>
+                </select>
+            </div>
+            <div>
+                <label for="area">12. RENDIMENTO EM HECTÁRES</label>
+                <input type="number" id="area" name="RENDIMENTO EM HECTÁRES:" placeholder=" Digite o rendimento em hectáres ..." required>
+            </div>
+            <div>
+                <label for="talhao">13. LOCAL DA OPERAÇÃO</label>
+                <select id="talhao" name="1º LOCAL DE OPERAÇÃO:" required>
+                    <option value="" disabled selected>Escolha o 1º local de operação ...</option>
+                    <optgroup label="TALHÕES DA FAZENDA RAÍZES">
+                    <option value="TH-01 (197,00 ha)">TH-1 (197,00 ha)</option>
+                    <option value="TH-02 (169,00 ha)">TH-2 (169,00 ha)</option>
+                    <option value="TH-03 (378,00 ha)">TH-3 (378,00 ha)</option>
+                    <option value="TH-04 (338,00 ha)">TH-04 (338,00 ha)</option>
+                    <option value="TH-05/06 (56,70 ha)">TH-05/06 (56,70 ha)</option>
+                    <option value="TH-07 (112,00 ha)">TH-07 (112,00 ha)</option>
+                    <option value="TH-08 (112,67 ha)">TH-08 (112,67 ha)</option>
+                    <option value="TH-09 (171,81 ha)">TH-09 (171,81 ha)</option>
+                    <option value="TH-10 (278,00 ha)">TH-10 (278,00 ha)</option>
+                    <option value="TH-11 (159,00 ha)">TH-11 (159,00 ha)</option>
+                    <option value="TH-12 (115,00 ha)">TH-12 (115,00 ha)</option>
+                    <option value="TH-13 (33,13 ha)">TH-13 (33,13 ha)</option>
+                    <option value="TH-13A (100,30 ha)">TH-13A (100,30 ha)</option>
+                    <option value="TH-14 (69,69 ha)">TH-14 (69,69 ha)</option>
+                    <option value="TH-15 (45,99 ha)">TH-15 (45,99 ha)</option>
+                    <option value="TH-16 (31,04 ha)">TH-16 (31,04 ha)</option>
+                    <option value="TH-BE1 (82,47 ha)">TH-BE1 (82,47 ha)</option>
+                    <option value="TH-BE2 (97,00 ha)">TH-BE2 (97,00 ha)</option>
+                    <option value="TH-BE4 (107,00 ha)">TH-BE4 (107,00 ha)</option>
+                    <option value="TH-BE3 (53,54 ha)">TH-BE3 (53,54 ha)</option>
+                    <option value="CINZERO-4 (22,00 ha)">CINZERO-4 (22,00 ha)</option>
+                    <option value="CINZERO-5 (64,64 ha)">CINZERO-5 (64,64 ha)</option>
+                    <option value="CINZERO-1 (14,69 ha)">CINZERO-1 (14,69 ha)</option>
+                    <option value="CINZERO-2 (125,00 ha)">CINZERO-2 (125,00 ha)</option>
+                    <option value="CINZERO-3 (23,86 ha)">CINZERO-3 (23,86 ha)</option>
+                    <option value="CINZERO-6 (94,10 ha)">CINZERO-6 (94,10 ha)</option>
+                    <option value="PIQUETE-1 (20,90 ha)">PIQUETE-1 (20,90 ha)</option>
+                    <option value="PIQUETE-2 (11,00 ha)">PIQUETE-2 (11,00 ha)</option>
+                    <option value="PIQUETE-3 (4,00 ha)">PIQUETE-3 (4,00 ha)</option>
+                    <optgroup label="OUTROS LOCAIS">
+                    <option value="CASA DE RAÇÃO">CASA DE RAÇÃO</option>
+                    <option value="CONFINAMENTO">CONFINAMENTO</option>
+                    <option value="PASTOS">PASTOS</option>
+                    <option value="SEDE">SEDE</option>
+                    <option value="OUTROS LOCAIS">OUTROS LOCAIS</option>
+                </select>
+            </div>
+            <div class="talhao-group">
+                <label for="multiTalhao">TRABALHOU EM MAIS LOCAIS?</label>
+                <input type="radio" id="sim" name="TRABALHOU EM MAIS LOCAIS?" value="SIM, SEGUE ABAIXO" onclick="showTalhoes()">
+                <label for="SIM">SIM</label>
+                <input type="radio" id="nao" name="TRABALHOU EM MAIS LOCAIS?" value="NÃO" onclick="hideTalhoes()">
+                <label for="NÃO">NÃO</label>
+            </div>
+            <div id="talhao2-group" class="hidden">
+                <label for="talhao2">2º LOCAL DA OPERAÇÃO</label>
+                <select id="talhao2" name="2º LOCAL DE OPERAÇÃO:" required>
+                    <option value="" disabled selected>Escolha o 2º local de operação ...</option>
+                    <optgroup label="TALHÕES DA FAZENDA RAÍZES">
+                        <option value="TH-01 (197,00 ha)">TH-1 (197,00 ha)</option>
+                        <option value="TH-02 (169,00 ha)">TH-2 (169,00 ha)</option>
+                        <option value="TH-03 (378,00 ha)">TH-3 (378,00 ha)</option>
+                        <option value="TH-04 (338,00 ha)">TH-04 (338,00 ha)</option>
+                        <option value="TH-05/06 (56,70 ha)">TH-05/06 (56,70 ha)</option>
+                        <option value="TH-07 (112,00 ha)">TH-07 (112,00 ha)</option>
+                        <option value="TH-08 (112,67 ha)">TH-08 (112,67 ha)</option>
+                        <option value="TH-09 (171,81 ha)">TH-09 (171,81 ha)</option>
+                        <option value="TH-10 (278,00 ha)">TH-10 (278,00 ha)</option>
+                        <option value="TH-11 (159,00 ha)">TH-11 (159,00 ha)</option>
+                        <option value="TH-12 (115,00 ha)">TH-12 (115,00 ha)</option>
+                        <option value="TH-13 (33,13 ha)">TH-13 (33,13 ha)</option>
+                        <option value="TH-13A (100,30 ha)">TH-13A (100,30 ha)</option>
+                        <option value="TH-14 (69,69 ha)">TH-14 (69,69 ha)</option>
+                        <option value="TH-15 (45,99 ha)">TH-15 (45,99 ha)</option>
+                        <option value="TH-16 (31,04 ha)">TH-16 (31,04 ha)</option>
+                        <option value="TH-BE1 (82,47 ha)">TH-BE1 (82,47 ha)</option>
+                        <option value="TH-BE2 (97,00 ha)">TH-BE2 (97,00 ha)</option>
+                        <option value="TH-BE4 (107,00 ha)">TH-BE4 (107,00 ha)</option>
+                        <option value="TH-BE3 (53,54 ha)">TH-BE3 (53,54 ha)</option>
+                        <option value="CINZERO-4 (22,00 ha)">CINZERO-4 (22,00 ha)</option>
+                        <option value="CINZERO-5 (64,64 ha)">CINZERO-5 (64,64 ha)</option>
+                        <option value="CINZERO-1 (14,69 ha)">CINZERO-1 (14,69 ha)</option>
+                        <option value="CINZERO-2 (125,00 ha)">CINZERO-2 (125,00 ha)</option>
+                        <option value="CINZERO-3 (23,86 ha)">CINZERO-3 (23,86 ha)</option>
+                        <option value="CINZERO-6 (94,10 ha)">CINZERO-6 (94,10 ha)</option>
+                        <option value="PIQUETE-1 (20,90 ha)">PIQUETE-1 (20,90 ha)</option>
+                        <option value="PIQUETE-2 (11,00 ha)">PIQUETE-2 (11,00 ha)</option>
+                        <option value="PIQUETE-3 (4,00 ha)">PIQUETE-3 (4,00 ha)</option>
+                        <optgroup label="OUTROS">
+                        <option value="CASA DE RAÇÃO">CASA DE RAÇÃO</option>
+                        <option value="CONFINAMENTO">CONFINAMENTO</option>
+                        <option value="PASTOS">PASTOS</option>
+                        <option value="SEDE">SEDE</option>
+                        <option value="OUTROS LOCAIS">OUTROS LOCAIS</option>
+                    </select>
+            </div>
+            <div id="talhao3-group" class="hidden">
+                <label for="talhao3">3º LOCAL DA OPERAÇÃO</label>
+                <select id="talhao3" name="3º LOCAL DE OPERAÇÃO:" required>
+                    <option value="" disabled selected>Escolha o 3º local de operação ...</option>
+                    <optgroup label="TALHÕES DA FAZENDA RAÍZES">
+                        <option value="TH-01 (197,00 ha)">TH-1 (197,00 ha)</option>
+                        <option value="TH-02 (169,00 ha)">TH-2 (169,00 ha)</option>
+                        <option value="TH-03 (378,00 ha)">TH-3 (378,00 ha)</option>
+                        <option value="TH-04 (338,00 ha)">TH-04 (338,00 ha)</option>
+                        <option value="TH-05/06 (56,70 ha)">TH-05/06 (56,70 ha)</option>
+                        <option value="TH-07 (112,00 ha)">TH-07 (112,00 ha)</option>
+                        <option value="TH-08 (112,67 ha)">TH-08 (112,67 ha)</option>
+                        <option value="TH-09 (171,81 ha)">TH-09 (171,81 ha)</option>
+                        <option value="TH-10 (278,00 ha)">TH-10 (278,00 ha)</option>
+                        <option value="TH-11 (159,00 ha)">TH-11 (159,00 ha)</option>
+                        <option value="TH-12 (115,00 ha)">TH-12 (115,00 ha)</option>
+                        <option value="TH-13 (33,13 ha)">TH-13 (33,13 ha)</option>
+                        <option value="TH-13A (100,30 ha)">TH-13A (100,30 ha)</option>
+                        <option value="TH-14 (69,69 ha)">TH-14 (69,69 ha)</option>
+                        <option value="TH-15 (45,99 ha)">TH-15 (45,99 ha)</option>
+                        <option value="TH-16 (31,04 ha)">TH-16 (31,04 ha)</option>
+                        <option value="TH-BE1 (82,47 ha)">TH-BE1 (82,47 ha)</option>
+                        <option value="TH-BE2 (97,00 ha)">TH-BE2 (97,00 ha)</option>
+                        <option value="TH-BE4 (107,00 ha)">TH-BE4 (107,00 ha)</option>
+                        <option value="TH-BE3 (53,54 ha)">TH-BE3 (53,54 ha)</option>
+                        <option value="CINZERO-4 (22,00 ha)">CINZERO-4 (22,00 ha)</option>
+                        <option value="CINZERO-5 (64,64 ha)">CINZERO-5 (64,64 ha)</option>
+                        <option value="CINZERO-1 (14,69 ha)">CINZERO-1 (14,69 ha)</option>
+                        <option value="CINZERO-2 (125,00 ha)">CINZERO-2 (125,00 ha)</option>
+                        <option value="CINZERO-3 (23,86 ha)">CINZERO-3 (23,86 ha)</option>
+                        <option value="CINZERO-6 (94,10 ha)">CINZERO-6 (94,10 ha)</option>
+                        <option value="PIQUETE-1 (20,90 ha)">PIQUETE-1 (20,90 ha)</option>
+                        <option value="PIQUETE-2 (11,00 ha)">PIQUETE-2 (11,00 ha)</option>
+                        <option value="PIQUETE-3 (4,00 ha)">PIQUETE-3 (4,00 ha)</option>
+                        <optgroup label="OUTROS">
+                        <option value="CASA DE RAÇÃO">CASA DE RAÇÃO</option>
+                        <option value="CONFINAMENTO">CONFINAMENTO</option>
+                        <option value="PASTOS">PASTOS</option>
+                        <option value="SEDE">SEDE</option>
+                        <option value="OUTROS LOCAIS">OUTROS LOCAIS</option>
+                    </select>
+            </div>
+            <div>
+                <label for="status">14. SITUAÇÃO DA OPERAÇÃO</label>
+                <select id="status" name="SITUAÇÃO DA OPERAÇÃO:" required>
+                    <option value="" disabled selected>Escolha a situação da operação ...</option>
+                    <option value="CONCLUÍDA">CONCLUÍDA</option>
+                    <option value="EM ANDAMENTO">EM ANDAMENTO</option>
+                    <option value="CANCELADA">CANCELADA</option>
+                </select>
+            </div>
+            <div>
+                <label for="motivo_da_parada">15. MOTIVO DA PARADA</label>
+                <select id="motivo_da_parada" name="MOTIVO DA PARADA:" required>
+                    <option value="" disabled selected>Escolha o motivo da parada ...</option>
+                    <option value="MÁQUINA COM DEFEITO/ AGUARDANDO MANUTENÇÃO">MÁQUINA COM DEFEITO/ AGUARDANDO MANUTENÇÃO</option>
+                    <option value="CLIMA NÃO FAVORÁVEL (CHUVA/VENTO)">CLIMA NÃO FAVORÁVEL (CHUVA/VENTO)</option>
+                    <option value="AGUARDANDO INSTRUÇÕES DO LÍDER">AGUARDANDO INSTRUÇÕES DO LÍDER</option>
+                    <option value="FINAL DE EXPEDIENTE">FINAL DE EXPEDIENTE</option>
+                    <option value="PAUSA PARA REFEIÇÕES">PAUSA PARA REFEIÇÕES</option>
+                    <option value="OPERAÇÃO CONCLUÍDA">OPERAÇÃO CONCLUÍDA</option>
+                    <option value="OUTRAS SITUAÇÕES">OUTRAS SITUAÇÕES</option>
+                </select>
+            </div>
+            <div>
+                <label for="observacao">16. OBSERVAÇÃO (MÁX. 50 CARACTERES)</label>
+                <textarea id="observacao" name="OBSERVAÇÃO GERAL:" rows="4" maxlength="50" placeholder="Digite sua observação aqui ..."></textarea>
+            </div>
+            <div class="button-group">
+                <button type="button" class="generate-btn" onclick="generateReport()">GERAR BDO</button>
+            </div>
+        </form>
+    </div>
+    <footer class="footer">
+        BDO &copy; 2024 CELSO JUNIOR. TODOS OS DIREITOS RESERVADOS.
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.15/jspdf.plugin.autotable.min.js"></script>
+    <script>
+        function calculateTimeDifference(startTime, endTime) {
+            const start = new Date('1970-01-01T' + startTime);
+            const end = new Date('1970-01-01T' + endTime);
+            const difference = end.getTime() - start.getTime();
+            const minutes = Math.floor(difference / 60000);
+            const hours = Math.floor(minutes / 60);
+            const remainingMinutes = minutes % 60;
+            return `${hours}:${remainingMinutes.toString().padStart(2, '0')}`;
+        }
+        function calculateHorimeterDifference(initialHorimeter, finalHorimeter) {
+            return finalHorimeter - initialHorimeter;
+        }
+
+        function showTalhoes() {
+            document.getElementById('talhao2-group').classList.remove('hidden');
+            document.getElementById('talhao3-group').classList.remove('hidden');
+        }
+
+        function hideTalhoes() {
+            document.getElementById('talhao2-group').classList.add('hidden');
+            document.getElementById('talhao3-group').classList.add('hidden');
+        }
+        function showImplemento() {
+            document.getElementById('implemento-group').classList.remove('hidden');
+        }
+
+        function hideImplemento() {
+            document.getElementById('implemento-group').classList.add('hidden');
+        }
+
+        function generateReport() {
+            const form = document.getElementById('boletim-form');
+            const data = new FormData(form);
+            const report = {};
+            for (const [key, value] of data.entries()) {
+                report[key] = value;
+            }
+
+            //console.log(report); // Utilize esta linha para verificar os dados
+
+            const startTime = report['HORA DE INÍCIO DA OPERAÇÃO:'];
+            const endTime = report['HORA DE TÉRMINO DA OPERAÇÃO:'];
+            const timeDifference = calculateTimeDifference(startTime, endTime);
+            report['HORAS TOTAIS DA OPERAÇÃO (TEMPO):'] = timeDifference;
+
+            const initialHorimeter = parseFloat(report['HORÍMETRO INICIAL:']);
+            const finalHorimeter = parseFloat(report['HORÍMETRO FINAL:']);
+            const horimeterDifference = calculateHorimeterDifference(initialHorimeter, finalHorimeter);
+            report['HORAS TOTAIS DE OPERAÇÃO (MÁQUINA):'] = horimeterDifference;
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFont("helvetica");
+            doc.setFontSize(20);
+            doc.setTextColor(41, 128, 186);
+            doc.text('(BDO) BOLETIM DE OPERAÇÕES AGRÍCOLAS', 105, 20, null, null, 'center');
+
+            const tableColumn = ["ITENS CHECADOS", "VERIFICAÇÃO"];
+            const tableRows = [];
+
+            // Corrigindo o acesso à propriedade OBSERVAÇÃO
+
+            for (const [key, value] of Object.entries(report)) {
+                if (key !== 'observacao' && key !== 'responsavel' && key !== 'lider') {
+                    let item = key.replace(/-/g, '').toUpperCase();
+                    tableRows.push([item, value || '']);
+                }
+            }
+            doc.autoTable(tableColumn, tableRows, { startY: 30 });
+            doc.save('boletim_de_operacoes_.pdf');
+        }
+
+
+
+
+
+
+    </script>
+</body>
+</html>
